@@ -87,10 +87,10 @@ class LinkedList {
         prevNode = currNode;
         currNode = currNode.next;
       }
-      if (currNode === null) {
-        console.log('Item not found on list');
-        return;
-      }
+      //   if (currNode === null) {
+      //     console.log('Item not found on list');
+      //     return;
+      //   }
       prevNode.next = new _Node(item, currNode);
 
     }
@@ -118,21 +118,124 @@ class LinkedList {
     }
   }
 
+  insertAt(index, item) {
+    if (this.head === null) {
+      this.insertFirst(item);
+    }
+    let currNode = this.head;
+    let prevNode = this.head;
+    let i = 0;
+
+    while ( i !== index) {
+      if (!currNode.next) {
+        console.log('This index does not exist use insertLast to add to the end of the list');
+        return;
+      }
+      prevNode = currNode;
+      currNode = currNode.next;
+      i++;
+    }
+    if (currNode === null) {
+      console.log('Item not found on list (insertAt)');
+      return;
+    }
+
+    let pushedItem = prevNode;
+    let newItem = new _Node(item, prevNode.next);
+    //    console.log(pushedItem);
+    pushedItem.next = newItem;
+    // to insert & replace use below
+    //   this.remove(targetNode);
+  }
+
 
 }
 
+
 function main() {
   let singlyList = new LinkedList();
-  singlyList.insertFirst('Apollo');
+  singlyList.insertFirst('Apollo Creed');
   singlyList.insertFirst('Boomer');
-  singlyList.insertFirst('Helo');
+  singlyList.insertFirst('Rocky Balboa');
   singlyList.insertFirst('Husker');
   singlyList.insertFirst('Starbuck');
   singlyList.insertFirst('Tauhida');
   singlyList.remove('squirrel');
-  singlyList.insertBefore('Apollo', 'John');
-  singlyList.insertAfter('Apollo', 'Tom');
+  singlyList.insertBefore('Apollo Creed', 'John');
+  singlyList.insertAfter('Apollo Creed', 'Tom');
+  singlyList.insertAt(9, 'Kimbo Slice');
   console.log(JSON.stringify(singlyList));
+  display(singlyList);
+  size(singlyList);
+  isEmpty(singlyList);
+  findPrevious(singlyList, 'Tom');
+  findLast(singlyList);
 }
 
 main();
+
+
+
+function display(list) {
+  if (list.head) {
+    console.log(list.head.value);
+  } else {
+    console.log('Empty List');
+    return;
+  }
+}
+
+function size(list) {
+
+  let currNode = list.head;
+  let i = 0;
+
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+    i++; 
+  } 
+  console.log(` Size = ${i}`);
+}
+
+
+function isEmpty(list) {
+  if (list.head) {
+    console.log('false');
+  } else {
+    console.log('true');
+  }
+}
+
+function findPrevious(list, key) {
+  if (!list.head) {
+    return;
+  }
+
+  let currNode = list.head;
+  let prevNode = list.head;
+
+  while (currNode.value !== key) {
+    prevNode = currNode;
+    currNode = currNode.next;
+  }
+  console.log(prevNode.value);
+  return prevNode.value;
+}
+
+function findLast(list) {
+  if (!list.head) {
+    return;
+  }
+
+  let currNode = list.head;
+
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+  }
+
+  console.log(currNode.value);
+  return currNode.value;
+}
+
+
+

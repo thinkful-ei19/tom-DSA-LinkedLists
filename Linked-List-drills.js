@@ -126,7 +126,7 @@ class LinkedList {
     let prevNode = this.head;
     let i = 0;
 
-    while ( i !== index) {
+    while (i !== index) {
       if (!currNode.next) {
         console.log('This index does not exist use insertLast to add to the end of the list');
         return;
@@ -192,8 +192,8 @@ function size(list) {
 
   while (currNode.next !== null) {
     currNode = currNode.next;
-    i++; 
-  } 
+    i++;
+  }
   console.log(` Size = ${i}`);
 }
 
@@ -238,4 +238,24 @@ function findLast(list) {
 }
 
 
+//Mystery program
+// Analyze the following function (without running it in an IDE) to determine what problem it is trying to solve.What is the runtime of this algorithm ?
 
+function WhatDoesThisProgramDo(lst) {
+  let current = lst.head;
+  while (current !== null) { // 1
+    let newNode = current;
+    while (newNode.next !== null) { // 1 
+      if (newNode.next.value === current.value) {
+        newNode.next = newNode.next.next;
+      }
+      else {
+        newNode = newNode.next;
+      }
+    }
+    current = current.next;
+  }
+}
+
+// this program will go the values in the list and remove the duplicates
+// ex: tom, joe, jim , tom , mike => tom, joe, jim , mike

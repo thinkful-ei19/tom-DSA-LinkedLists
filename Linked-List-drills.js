@@ -170,6 +170,8 @@ function main() {
   isEmpty(singlyList);
   findPrevious(singlyList, 'Tom');
   findLast(singlyList);
+  // reverse(singlyList);
+  middleList(singlyList);
 }
 
 main();
@@ -194,7 +196,8 @@ function size(list) {
     currNode = currNode.next;
     i++;
   }
-  console.log(` Size = ${i}`);
+  console.log(i);
+  return i;
 }
 
 
@@ -259,3 +262,47 @@ function WhatDoesThisProgramDo(lst) {
 
 // this program will go the values in the list and remove the duplicates
 // ex: tom, joe, jim , tom , mike => tom, joe, jim , mike
+
+// Reverse a list
+
+function reverse(list) {
+  if (!list.head) {
+    return;
+  }
+  let currNode = list.head;
+  let i = 0;
+
+  while (currNode.next !== null) {
+    currNode = currNode.next;
+    i++;
+  }
+
+  console.log(list);
+  return currNode.value;
+}
+
+function middleList(list) {
+
+  let mid = size(list) / 2;
+  mid = Math.round(mid);
+
+  let currNode = list.head;
+  let prevNode = list.head;
+  let i = 0;
+
+  while (i !== mid) {
+    if (!currNode.next) {
+      return;
+    }
+    prevNode = currNode;
+    currNode = currNode.next;
+    i++;
+  }
+  if (currNode === null) {
+    return;
+  }
+
+  let middle = prevNode;
+  //    console.log(pushedItem);
+  return console.log(list.find(middle.value));
+}
